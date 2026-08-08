@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>YouTube — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn">☰</button>
+    <a class="logo" href="index.html"><span class="yt-mark">▶</span><span>YouTube</span></a>
+    <div class="search">
+      <input id="searchBox" placeholder="Search" aria-label="Search">
+      <button>⌕</button>
+    </div>
+    <button class="icon-btn">＋</button>
+    <button class="icon-btn">🔔</button>
+    <a class="avatar-link" href="channel.html" title="Open TheGuyBro channel">
+      <img src="assets/profile.jpeg" class="avatar" alt="TheGuyBro profile">
+    </a>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <a class="side active" href="index.html">⌂ <span>Home</span></a>
+    <a class="side" href="#">▣ <span>Shorts</span></a>
+    <a class="side" href="#">▸ <span>Subscriptions</span></a>
+    <hr>
+    <a class="side" href="channel.html">◉ <span>Your channel</span></a>
+    <a class="side" href="#">↺ <span>History</span></a>
+    <a class="side" href="#">▶ <span>Your videos</span></a>
+    <hr>
+    <div class="sidebar-note">This is a custom prank mockup.</div>
+  </aside>
+
+  <main class="content">
+    <div class="chips">
+      <button class="chip active">All</button><button class="chip">Gaming</button>
+      <button class="chip">Music</button><button class="chip">Live</button>
+      <button class="chip">Minecraft</button><button class="chip">Fortnite</button>
+      <button class="chip">Comedy</button>
+    </div>
+    <section class="hero-card">
+      <div>
+        <div class="eyebrow">TRENDING CHANNEL</div>
+        <h1>TheGuyBro</h1>
+        <p>Welcome to the biggest channel on the site.</p>
+        <a class="primary" href="channel.html">View channel</a>
+      </div>
+      <img src="assets/profile.jpeg" alt="" class="hero-avatar">
+    </section>
+    <h2>Recommended</h2>
+    <div class="grid" id="videoGrid"></div>
+  </main>
+
+<script>
+const videos = [
+  ["I SURVIVED 100 DAYS IN THE CRAZIEST WORLD","1.2M views","TheGuyBro"],
+  ["I Built a SECRET Gaming Room","842K views","TheGuyBro"],
+  ["THIS UPDATE CHANGED EVERYTHING","2.1M views","TheGuyBro"],
+  ["I Tried the Hardest Obby Ever","965K views","TheGuyBro"],
+  ["24 HOURS IN A GIANT MANSION","3.4M views","TheGuyBro"],
+  ["My Friends Had NO IDEA","711K views","TheGuyBro"],
+  ["The Most INSANE Challenge","1.8M views","TheGuyBro"],
+  ["I Made My Own Game","1.1M views","TheGuyBro"]
+];
+const colors = ["#d21f3c","#284d73","#6c3d8e","#2e7658","#8b5e34","#3c4c84","#a33d55","#446c6d"];
+const grid = document.getElementById("videoGrid");
+videos.forEach((v,i)=>{
+  const card=document.createElement("article");
+  card.className="video-card";
+  card.innerHTML=`<button class="thumb" style="--c:${colors[i]}"><span class="play">▶</span><span class="duration">10:${String(12+i*7).padStart(2,"0")}</span></button>
+  <div class="video-row"><img src="assets/profile.jpeg" class="mini-avatar"><div><h3>${v[0]}</h3><p>${v[2]}</p><p>${v[1]} • ${i+1} days ago</p></div></div>`;
+  card.querySelector(".thumb").onclick=()=>alert("This video is part of the prank mockup and is intentionally not playable.");
+  grid.appendChild(card);
+});
+document.getElementById("menuBtn").onclick=()=>document.getElementById("sidebar").classList.toggle("collapsed");
+document.getElementById("searchBox").addEventListener("input",e=>{
+  const q=e.target.value.toLowerCase();
+  [...grid.children].forEach(c=>c.style.display=c.innerText.toLowerCase().includes(q)?"":"none");
+});
+</script>
+</body>
+</html>

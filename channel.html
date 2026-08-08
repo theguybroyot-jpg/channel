@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TheGuyBro — Channel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="icon-btn" onclick="history.back()">←</button>
+  <a class="logo" href="index.html"><span class="yt-mark">▶</span><span>YouTube</span></a>
+  <div class="search"><input placeholder="Search"><button>⌕</button></div>
+  <button class="icon-btn">＋</button><button class="icon-btn">🔔</button>
+  <a class="avatar-link" href="channel.html"><img src="assets/profile.jpeg" class="avatar" alt="TheGuyBro"></a>
+</header>
+
+<main class="channel-page">
+  <div class="banner"></div>
+  <section class="channel-head">
+    <img src="assets/profile.jpeg" class="channel-avatar" alt="TheGuyBro">
+    <div class="channel-info">
+      <h1>TheGuyBro <span class="verified">✓</span></h1>
+      <p>@TheGuyBro</p>
+      <p class="subcount"><span id="subCount">142</span> subscribers • 86 videos</p>
+      <p class="bio">Gaming, challenges, funny moments, and whatever sounds fun.</p>
+    </div>
+    <button class="subscribe">Subscribed</button>
+  </section>
+  <nav class="tabs"><a class="selected" href="#videos">Videos</a><a href="#">Shorts</a><a href="#">Live</a><a href="#">Playlists</a><a href="#">Community</a></nav>
+
+  <section id="videos">
+    <div class="section-title"><h2>Videos</h2><span>Sort by</span></div>
+    <div class="grid" id="channelGrid"></div>
+  </section>
+</main>
+
+<div class="growth-panel">
+  <strong>Channel growth</strong>
+  <div class="growth-track"><div id="growthBar"></div></div>
+  <span id="growthText">142 → 1,000,000 subscriber journey</span>
+</div>
+
+<div class="prank-badge">CUSTOM PRANK MOCKUP</div>
+
+<script>
+const milestones=[142, 318, 1270, 8420, 27600, 91400, 247000, 615000, 1000000];
+let step=Number(localStorage.getItem("theGuyBroGrowthStep")||0);
+if(step < milestones.length-1){
+  step++;
+  localStorage.setItem("theGuyBroGrowthStep", step);
+}
+const displayed=milestones[step];
+document.getElementById("subCount").textContent=displayed.toLocaleString();
+document.getElementById("growthText").textContent =
+  `${displayed.toLocaleString()} → 1,000,000 subscriber journey`;
+document.getElementById("growthBar").style.width =
+  `${(displayed/1000000)*100}%`;
+
+const videos=[
+"I SURVIVED 100 DAYS IN THE CRAZIEST WORLD",
+"I Built a SECRET Gaming Room",
+"THIS UPDATE CHANGED EVERYTHING",
+"I Tried the Hardest Obby Ever",
+"24 HOURS IN A GIANT MANSION",
+"My Friends Had NO IDEA",
+"The Most INSANE Challenge",
+"I Made My Own Game",
+"Can We Beat This Impossible Level?",
+"I Let My Subscribers Choose My Challenge",
+"Nobody Expected This To Happen",
+"Building My Dream Setup"
+];
+const colors=["#d21f3c","#284d73","#6c3d8e","#2e7658","#8b5e34","#3c4c84","#a33d55","#446c6d"];
+const grid=document.getElementById("channelGrid");
+videos.forEach((title,i)=>{
+ const card=document.createElement("article");
+ card.className="video-card";
+ card.innerHTML=`<button class="thumb" style="--c:${colors[i%colors.length]}"><span class="play">▶</span><span class="duration">${9+i}:${String(8+i*3).padStart(2,"0")}</span></button>
+ <div class="video-row"><img src="assets/profile.jpeg" class="mini-avatar"><div><h3>${title}</h3><p>TheGuyBro</p><p>${(711+i*137).toLocaleString()}K views • ${i+1} weeks ago</p></div></div>`;
+ card.querySelector(".thumb").onclick=()=>alert("Video playback is disabled in this prank mockup.");
+ grid.appendChild(card);
+});
+</script>
+</body>
+</html>
